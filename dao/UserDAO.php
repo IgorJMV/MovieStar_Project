@@ -38,7 +38,21 @@
         }
 
         public function findByEmail($email){
-            //TOOO
+            if($email != ""){
+                $statement = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
+                $statement->bindParam(":email", $email);
+                $statement->execute();
+
+                if($statement->rowCount() > 0){
+                    $data = $statement->fetch();
+                    $user = $this->buildUser($data);
+                    return $user;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
 
         public function findById($id){
