@@ -10,7 +10,7 @@
         private string $bio;
         private string $token;
 
-        function __construct($id, $name, $lastname, $email, $password, $image, $bio, $token){
+        function __construct($id = 0, $name = "", $lastname = "", $email = "", $password = "", $image = "", $bio = "", $token = ""){
                 $this->id = $id;
                 $this->name = $name;
                 $this->lastname = $lastname;
@@ -19,6 +19,14 @@
                 $this->image = $image;
                 $this->bio = $id;
                 $this->token = $token;
+        }
+
+        public function generateToken(){
+                return bin2hex(random_bytes(50));
+        }
+
+        public function generatePassword($password){
+                return password_hash($password, PASSWORD_DEFAULT);
         }
 
         /**
