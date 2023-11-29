@@ -78,7 +78,27 @@
         }
 
         public function authenticateUser($email, $password){
-            //TODO:
+            $user = $this->findByEmail($email);
+
+            if($user){
+                //Checar se as senhas batem
+                if(password_verify($password, $user->getPassword())){
+                    //Gerar um token e inserir na session
+                    $token = $user->generateToken();
+
+                    $this->setTokenToSession($token);
+
+                    //Atualizar token no usuário
+                    $user->setToken($token);
+                    $this->update($user);
+
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
 
         public function findByEmail($email){
