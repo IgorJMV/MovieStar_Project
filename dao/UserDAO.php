@@ -44,8 +44,38 @@
 
         }
 
-        public function update(User $user){
-            //TODO:
+        public function update(User $user, $redirect = true){
+            $name = $user->getName();
+            $lastname = $user->getLastname();
+            $email = $user->getEmail();
+            $image = $user->getImage();
+            $bio = $user->getBio();
+            $token = $user->getToken();
+            $id = $user->getId();
+
+            $statement = $this->conn->prepare("UPDATE users SET
+                name = :name,
+                lastname = :lastname,
+                email = :email,
+                image = :image,
+                bio = :bio,
+                token = :token
+                WHERE id = :id
+            ");
+            $statement->bindParam(":name", $name);
+            $statement->bindParam(":lastname", $lastname);
+            $statement->bindParam(":email", $email);
+            $statement->bindParam(":image", $image);
+            $statement->bindParam(":bio", $bio);
+            $statement->bindParam(":token", $token);
+            $statement->bindParam(":id", $id);
+
+            $statement->execute();
+
+            if($redirect){
+                //Redireciona para o perfil do usuário
+                $this->message->setMessage("Dados atualizados com sucesso!", "success", "editprofile.php");
+            }
         }
 
         public function verifyByToken($protected = false){
@@ -86,11 +116,11 @@
                     //Gerar um token e inserir na session
                     $token = $user->generateToken();
 
-                    $this->setTokenToSession($token);
+                    $this->setTokenToSession($token, false);
 
                     //Atualizar token no usuário
                     $user->setToken($token);
-                    $this->update($user);
+                    $this->update($user, false);
 
                     return true;
                 } else {

@@ -63,7 +63,7 @@
         //Tenta autenticar o usuário
 
         if ($userDao->authenticateUser($email, $password)) {
-            
+            $message->setMessage("Seja bem-vindo!", "success", "editprofile.php");
         }else {
             $message->setMessage("Usuário e/ou senha incorretas.", "error", "back");
         }
