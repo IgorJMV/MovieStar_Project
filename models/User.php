@@ -29,6 +29,10 @@
                 return password_hash($password, PASSWORD_DEFAULT);
         }
 
+        public function getFullName($user){
+                return $user->name . " " . $user->lastname;
+        }
+
         /**
          * Get the value of id
          */ 
