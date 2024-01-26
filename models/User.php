@@ -17,7 +17,7 @@
                 $this->email = $email;
                 $this->password = $password;
                 $this->image = $image;
-                $this->bio = $id;
+                $this->bio = $bio;
                 $this->token = $token;
         }
 

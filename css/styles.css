@@ -136,6 +136,10 @@
     background-size: cover;
     background-position: center;
     margin: 15px auto;
+}
+
+#change-data-container,
+#change-password-container form {
     display: flex;
     flex-direction: column;
     gap: 10px;

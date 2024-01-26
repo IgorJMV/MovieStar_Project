@@ -8,6 +8,7 @@
     $user = new User();
 
     $userData = $userDao->verifyByToken(true);
+    
 
     $fullName = $user->getFullName($userData);
 
@@ -22,7 +23,7 @@
             <form action="<?= $BASE_URL ?>user_process.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="type" value="update">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div id="change-data-container" class="col-md-4">
                         <h1><?= $fullName ?></h1>
                         <p class="page-description">Altere seus dados no formulário abaixo:</p>
                         <div class="form-group">

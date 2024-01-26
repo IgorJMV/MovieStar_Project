@@ -84,6 +84,7 @@
                 $token = $_SESSION["token"];
                 
                 $user = $this->findByToken($token);
+                
 
                 if($user){
                     return $user;
@@ -162,6 +163,7 @@
                 if($statement->rowCount() > 0){
                     $data = $statement->fetch();
                     $user = $this->buildUser($data);
+                    
                     return $user;
                 } else {
                     return false;
